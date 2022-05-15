@@ -154,7 +154,6 @@ def generate_input_json(
     remappings: Optional[list] = None,
     optimizer: Optional[Dict] = None,
 ) -> Dict:
-
     """Formats contracts to the standard solc input json.
 
     Args:
@@ -236,7 +235,6 @@ def _get_allow_paths(allow_paths: Optional[str], remappings: list) -> str:
 def compile_from_input_json(
     input_json: Dict, silent: bool = True, allow_paths: Optional[str] = None
 ) -> Dict:
-
     """
     Compiles contracts from a standard input json.
 

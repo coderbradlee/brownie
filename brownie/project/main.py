@@ -118,6 +118,15 @@ class _ProjectBase:
                 if alias == data["contractName"]:
                     # if the alias == contract name, this is a part of the core project
                     path = self._build_path.joinpath(f"contracts/{alias}.json")
+
+                    # save abi,bin file
+                    abipath = self._build_path.joinpath(f"contracts/{alias}.abi")
+                    with abipath.open("w") as fp:
+                        fp.write(json.dumps(data["abi"]))
+                    binpath = self._build_path.joinpath(f"contracts/{alias}.bin")
+                    with binpath.open("w") as fp:
+                        fp.write(data["deployedBytecode"])
+
                 else:
                     # otherwise, this is an artifact from an external dependency
                     path = self._build_path.joinpath(f"contracts/dependencies/{alias}.json")
@@ -632,7 +641,6 @@ def from_brownie_mix(
 
 
 def from_ethpm(uri: str) -> "TempProject":
-
     """
     Generates a TempProject from an ethPM package.
     """
